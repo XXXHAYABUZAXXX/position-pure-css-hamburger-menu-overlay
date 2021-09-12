@@ -21,7 +21,6 @@ ul {
 
 a {
   text-decoration: none;
-  text-transform: capitalize;
 }
 
 .container {
@@ -61,8 +60,24 @@ a {
       }
     }
 
+    /* Rotate On Hover When Checked */
     &:checked:hover + .hamburger > div {
       transform: rotate(225deg);
+    }
+
+    // show menu
+    &:checked ~ .menu {
+      visibility: visible;
+
+      & > div {
+        transform: scale(1);
+        transition-duration: $menu-speed;
+
+        & > div {
+          opacity: 1;
+          transition: opacity ease 0.4s;
+        }
+      }
     }
   }
 
@@ -77,13 +92,14 @@ a {
     width: 60px;
     padding: 1rem;
     background: $primary-color;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
     & > div {
       position: relative;
-
+      // flex: none;
       height: 2px;
       width: 100%;
       background: #fff;
@@ -119,6 +135,59 @@ a {
       }
     }
   }
+
+  // menu
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+    // overflow: hidden;
+    visibility: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+      background: $overlay-color;
+      border-radius: 50%;
+      height: 200vw;
+      width: 200vw;
+      flex: none;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      transform: scale(0);
+      transition: all ease 0.4s;
+
+      & > div {
+        // text-align: center;
+        max-height: 100vh;
+        max-width: 90vw;
+        opacity: 0;
+
+        transition: opacity ease 0.4s;
+
+        ul li {
+          font-size: 1.5rem;
+          padding: 0.7rem;
+          color: #fff;
+
+          a {
+            text-transform: capitalize;
+            font-weight: 600;
+            color: inherit;
+            transition: color ease 0.4s;
+          }
+        }
+      }
+    }
+  }
 }
 
 // showcase
@@ -131,6 +200,7 @@ a {
 
   .showcase-inner {
     height: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -153,7 +223,7 @@ a {
       padding: 0.75rem 1.5rem;
       margin: 1rem;
 
-      transition: opacity ease-in 0.2s;
+      transition: opacity ease-in-out 0.2s;
 
       &:hover {
         opacity: 0.7;
@@ -163,8 +233,9 @@ a {
 
   &::before {
     content: "";
-    background: url("/image/pexels-photo-533923.jpeg") no-repeat center;
-    background-size: cover;
+    background: url("/image/pexels-photo-533923.jpeg") no-repeat center
+      center/cover;
+    // background-size: cover;
 
     position: absolute;
     top: 0;

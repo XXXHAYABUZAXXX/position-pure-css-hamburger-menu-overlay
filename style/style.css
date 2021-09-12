@@ -21,7 +21,6 @@ ul {
 
 a {
   text-decoration: none;
-  text-transform: capitalize;
 }
 
 .container {
@@ -46,6 +45,7 @@ a {
   height: 60px;
   width: 60px;
   opacity: 0;
+  /* Rotate On Hover When Checked */
 }
 
 .menu-wrap .toggler:checked + .hamburger > div {
@@ -62,6 +62,23 @@ a {
 .menu-wrap .toggler:checked:hover + .hamburger > div {
   -webkit-transform: rotate(225deg);
           transform: rotate(225deg);
+}
+
+.menu-wrap .toggler:checked ~ .menu {
+  visibility: visible;
+}
+
+.menu-wrap .toggler:checked ~ .menu > div {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition-duration: 0.75s;
+          transition-duration: 0.75s;
+}
+
+.menu-wrap .toggler:checked ~ .menu > div > div {
+  opacity: 1;
+  -webkit-transition: opacity ease 0.4s;
+  transition: opacity ease 0.4s;
 }
 
 .menu-wrap .hamburger {
@@ -113,6 +130,69 @@ a {
   background: inherit;
 }
 
+.menu-wrap .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu-wrap .menu > div {
+  background: rgba(24, 39, 51, 0.85);
+  border-radius: 50%;
+  height: 200vw;
+  width: 200vw;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all ease 0.4s;
+  transition: all ease 0.4s;
+}
+
+.menu-wrap .menu > div > div {
+  max-height: 100vh;
+  max-width: 90vw;
+  opacity: 0;
+  -webkit-transition: opacity ease 0.4s;
+  transition: opacity ease 0.4s;
+}
+
+.menu-wrap .menu > div > div ul li {
+  font-size: 1.5rem;
+  padding: 0.7rem;
+  color: #fff;
+}
+
+.menu-wrap .menu > div > div ul li a {
+  text-transform: capitalize;
+  font-weight: 600;
+  color: inherit;
+  -webkit-transition: color ease 0.4s;
+  transition: color ease 0.4s;
+}
+
 .showcase {
   position: relative;
   background: rgba(13, 110, 139, 0.75);
@@ -153,8 +233,8 @@ a {
   color: #fff;
   padding: 0.75rem 1.5rem;
   margin: 1rem;
-  -webkit-transition: opacity ease-in 0.2s;
-  transition: opacity ease-in 0.2s;
+  -webkit-transition: opacity ease-in-out 0.2s;
+  transition: opacity ease-in-out 0.2s;
 }
 
 .showcase .showcase-inner .btn:hover {
@@ -163,8 +243,7 @@ a {
 
 .showcase::before {
   content: "";
-  background: url("/image/pexels-photo-533923.jpeg") no-repeat center;
-  background-size: cover;
+  background: url("/image/pexels-photo-533923.jpeg") no-repeat center center/cover;
   position: absolute;
   top: 0;
   left: 0;
